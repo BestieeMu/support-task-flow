@@ -2,12 +2,12 @@ import connectMongodb from "@/libs/mongodb/mongodb"
 import Accounts from "@/models/register";
 import { NextResponse } from "next/server";
 
-export async function POST() {
+export async function POST(request) {
     try {
-        await connectMongodb(req);
-        const { email } = await req.json();
+        await connectMongodb();
+        const { email } = await request.json();
         const user = await Accounts.findOne({ email }).select('_id');
-        console.log("this is the use:", user);
+      
         return NextResponse.json({ user })
     } catch (error) {
         console.log(error)

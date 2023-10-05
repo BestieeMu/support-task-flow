@@ -4,26 +4,77 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 const Page = () => {
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    Password: "",
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleFormChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+  // const handleFormChange = (e) => {
+  //   e.preventDefault();
+  //   setForm({
+  //     ...form,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (!name || !email || !password) {
+      console.log("you are missing some filed");
+    }
+    try {
+      const user_exist_res = await fetch("/api/userExist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const { user } = await user_exist_res.json();
+
+      if (user) {
+        alert("user already exist!");
+        setName("");
+        setEmail("");
+        setPassword("");
+        setLoading(false);
+        return;
+      }
+
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+
+      if (res.ok) {
+        setLoading(false);
+        setName("");
+        setEmail("");
+        setPassword("");
+      } else {
+        console.log("registration failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
-      <main className="w-full h-screen bg-orange-500 flex items-start">
+      <main className="w-full h-screen  flex items-start">
         <div
-          className="w-full bg-red-500 h-full"
+          className="w-full h-full"
           style={{
-            backgroundImage: `url(${"https://res.cloudinary.com/dmbsct2bo/image/upload/v1696181686/industrial-designers-working-3d-model_shx8ho.jpg"})`,
+            backgroundImage: `url(${"https://img.freepik.com/free-photo/stressed-businesswoman-suffering-from-headache-work-doing-overtime-late-night_482257-2106.jpg?size=626&ext=jpg"})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -33,18 +84,22 @@ const Page = () => {
         >
           <Image
             src={
-              "https://res.cloudinary.com/dmbsct2bo/image/upload/v1696191912/New_Project_2_dub5vy.png"
+              "https://res.cloudinary.com/dmbsct2bo/image/upload/v1696191556/New_Project_1_flus5x.png"
             }
-            width={250}
-            height={250}
+            width={100}
+            height={100}
             alt="logo"
           />
         </div>
 
-        <div className="w-full md:w-4/12 bg-gray-100 h-full flex justify-center items-center">
-          <form action="" className=" w-9/12 flex flex-col items-center gap-7">
+        <div className="w-full md:w-5/12  h-full flex justify-center items-center">
+          <form
+            action=""
+            onSubmit={handleSubmit}
+            className=" w-9/12 flex flex-col items-center gap-7"
+          >
             <div className="flex justify-start items-center w-full">
-              <h2 className="text-5xl text-[#4B4EFC] font-bold">Sign Up</h2>
+              <h2 className="text-5xl text-accent font-bold">Sign Up</h2>
             </div>
 
             <label
@@ -54,9 +109,10 @@ const Page = () => {
               Full Name
               <input
                 type="text"
-                onChange={handleFormChange}
+                onChange={(e) => setName(e.target.value)}
                 name="fullName"
                 required
+                value={name}
                 className="w-full h-12 outline-none text-[16px] px-2 border border-gray-400 rounded"
               />
             </label>
@@ -67,9 +123,10 @@ const Page = () => {
               Email
               <input
                 type="email"
-                onChange={handleFormChange}
+                onChange={(e) => setEmail(e.target.value)}
                 name="email"
                 required
+                value={email}
                 className="w-full h-12 outline-none text-[16px] px-2 border border-gray-400 rounded"
               />
             </label>
@@ -80,9 +137,10 @@ const Page = () => {
               Password
               <input
                 type="password"
-                onChange={handleFormChange}
+                onChange={(e) => setPassword(e.target.value)}
                 name="password"
                 required
+                value={password}
                 className="w-full h-12 outline-none text-[16px] px-2 border border-gray-400 rounded"
               />
             </label>
@@ -91,14 +149,15 @@ const Page = () => {
             </div>
             <button
               type="submit"
-              className="w-full h-12 bg-[#4B4EFC] rounded text-[16px] text-white "
+              className="w-full h-12 bg-primary rounded text-[16px] text-white "
+              disabled={loading}
             >
-              Sign Up
+              {loading ? "loading..." : "Sign Up"}
             </button>
             <div className="flex justify-start items-center w-full">
               <Link href={"/sign-in"}>
                 <p className="text-1xl">
-                  Not New? <span className="text-red-500">Sign Up</span>
+                  Not New? <span className="text-accent">Sign In</span>
                 </p>
               </Link>
             </div>
