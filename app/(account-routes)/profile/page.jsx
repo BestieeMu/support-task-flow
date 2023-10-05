@@ -1,3 +1,4 @@
+import Header from '@/components/Header/Header'
 import React from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 
@@ -7,27 +8,14 @@ const org = [
         id: "hbebbefbefu",
         role: 'Admin'
     },
-    {
-        title: 'Facility',
-        id: "nireifneriferi",
-        role: 'Staff'
-    },
-    {
-        title: 'Inventory',
-        id: "nwniwninw",
-        role: 'Staff'
-    },
-    {
-        title: 'Software Development',
-        id: "hbebbjrk-rorro-efbefu",
-        role: 'Staff'
-    },
+
  
   
 ]
 const Page = () => {
   return (
     <>
+    <Header />
       <div className='w-full flex flex-col items-center  min-h-screen'>
 <div className='flex flex-col items-center gap-3'>
     <h2 className='text-3xl font-medium mt-20'>All The Orgarnization</h2>

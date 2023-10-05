@@ -2,3 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    src: url('../public/fonts/headings/PlastoTrial-Regular.otf');
+    font-family: 'heading';
+}
+
+
+h1 {
+    font-family: heading;
+
+}
+
+p {
+    font-family: heading;
+}
+
+.hero-bg {
+    background-image: linear-gradient(15deg,
+            hsl(242deg 94% 94%) 29%,
+            hsl(242deg 98% 92%) 52%,
+            hsl(243deg 100% 90%) 62%,
+            hsl(243deg 100% 88%) 69%,
+            hsl(243deg 100% 87%) 73%,
+            hsl(244deg 100% 85%) 77%,
+            hsl(244deg 100% 83%) 80%,
+            hsl(244deg 100% 81%) 83%,
+            hsl(244deg 99% 79%) 85%,
+            hsl(245deg 98% 77%) 87%,
+            hsl(245deg 97% 75%) 88%,
+            hsl(245deg 96% 73%) 90%,
+            hsl(245deg 94% 71%) 91%,
+            hsl(245deg 93% 68%) 93%,
+            hsl(245deg 92% 66%) 94%,
+            hsl(245deg 91% 64%) 95%,
+            hsl(245deg 89% 61%) 96%,
+            hsl(244deg 88% 59%) 97%,
+            hsl(244deg 87% 56%) 98%,
+            hsl(243deg 86% 52%) 99%,
+            hsl(242deg 96% 47%) 100%);
+}
+
+/* .words{
+    overflow: hidden;
+}
+.word{
+    display: block;
+    height: 100%;
+    padding-left: 6px;
+    padding-top: 4px;
+    animation: slide-up 4s infinite;
+}
+
+@keyframes slide-up {
+    10%{
+        -webkit-transform: translateY(-105%);
+        transform: translateY(-105%);
+    }
+    25%{
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+    35%{
+        -webkit-transform: translateY(-205%);
+        transform: translateY(-205%);
+    }
+    50%{
+        -webkit-transform: translateY(-200%);
+        transform: translateY(-200%);
+    }
+    60%{
+        -webkit-transform: translateY(-305%);
+        transform: translateY(-305%);
+    }
+    75%{
+        -webkit-transform: translateY(-300%);
+        transform: translateY(-300%);
+    }
+    85%{
+        -webkit-transform: translateY(-405%);
+        transform: translateY(-405%);
+    }
+    100%{
+        -webkit-transform: translateY(-400%);
+        transform: translateY(-400%);
+    }
+    
+} */
