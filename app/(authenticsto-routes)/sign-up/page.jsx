@@ -2,13 +2,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+
 
 const Page = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+ const router = useRouter()
   // const handleFormChange = (e) => {
   //   e.preventDefault();
   //   setForm({
@@ -22,6 +24,7 @@ const Page = () => {
     setLoading(true);
     if (!name || !email || !password) {
       console.log("you are missing some filed");
+      return
     }
     try {
       const user_exist_res = await fetch("/api/userExist", {
@@ -36,9 +39,6 @@ const Page = () => {
 
       if (user) {
         alert("user already exist!");
-        setName("");
-        setEmail("");
-        setPassword("");
         setLoading(false);
         return;
       }
@@ -60,6 +60,7 @@ const Page = () => {
         setName("");
         setEmail("");
         setPassword("");
+        router.replace('/sign-in')
       } else {
         console.log("registration failed");
       }
