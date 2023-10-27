@@ -2,6 +2,7 @@ import Header from "@/components/dasboard-components/header/Header";
 import "../globals.css";
 import { Inter } from "next/font/google";
 import SideBar from "@/components/dasboard-components/side-bar/SideBar";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
@@ -13,6 +14,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <NextTopLoader color="#0063F3" showSpinner={true} easing="ease" height={6} />
+
         <div className="flex items-start w-full">
           <div className="w-[200px] ">
             <SideBar />
