@@ -1,10 +1,10 @@
 "use client";
+import Assignments from "@/components/dasboard-components/assignment/Assignment";
 import MyCalendar from "@/components/dasboard-components/calender/Calender";
 import MeetingsContainer from "@/components/dasboard-components/meetings/MeetingsContainer";
 import VCard from "@/components/dasboard-components/view-card/VCard";
-// import { Chart } from "chart.js";
+import Chart from "@/components/dasboard-components/chart/Chart";
 import React from "react";
-import { Chart } from "react-google-charts";
 import { VscSearch } from "react-icons/vsc";
 
 const Page = () => {
@@ -44,31 +44,21 @@ const Page = () => {
        
          {/* /////////// */}
          <div>
-          <div className="w-full justify-between mt-10 flex items-center">
+          <div className="w-full justify-between mt-10 flex items-center gap-3">
             <VCard />
             <VCard />
             <VCard />
           </div>
           {/* /////////// */}
-              <div className="w-full gap-10 mt-10 flex items-start">
-            <Chart
-              className="rounded-xgl"
-              chartType="BarChart"
-              data={[
-                ["Task", "Completed"],
-                [4, 5.5],
-                [8, 12],
-              ]}
-              width="100%"
-              height="500px"
-              legendToggle
-            />
+              <div className="w-9/12 gap-10 mt-10 flex items-start">
+            <Chart/>
             <MeetingsContainer/>
           </div>
               </div>
         </div>
-        <div className="">
-          <MyCalendar />
+        <div className="w-full mt-5">
+          <MyCalendar/>
+          <Assignments/>
         </div>
       </div>
     </>

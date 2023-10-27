@@ -8,7 +8,7 @@ const onPanelChange = (value, mode) => {
 const  MyCalendar= () => {
   const { token } = theme.useToken();
   const wrapperStyle = {
-    width: 300,
+    width: 350,
     border: `1px solid ${token.colorBorderSecondary}`,
     borderRadius: token.borderRadiusL
   };
