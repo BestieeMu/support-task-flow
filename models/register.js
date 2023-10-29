@@ -6,6 +6,9 @@ const registerSchema = new Schema(
             type: String,
             require: true,
         },
+        profilePicture : {
+            type: String,
+        },
         email : {
             type: String,
             require: true,
@@ -13,13 +16,17 @@ const registerSchema = new Schema(
         password : {
            type: String,
            require: true 
-        }
+        },
+        createdOrganizations: {
+            type: [],
+        },
+     
     },
     {
         timestamps: true,
     }
 );
 
-const Accounts = mongoose.models.Accounts || mongoose.model("Accounts", registerSchema);
+const Accounts = mongoose?.models?.Accounts || mongoose.model("Accounts", registerSchema);
 
 export default Accounts;
