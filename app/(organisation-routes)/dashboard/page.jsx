@@ -1,5 +1,5 @@
 "use client";
-import Assignments from "@/components/dasboard-components/assignment/Assignment";
+import Assignments from "@/components/dasboard-components/Assignment/Assignment";
 import MyCalendar from "@/components/dasboard-components/calender/Calender";
 import MeetingsContainer from "@/components/dasboard-components/meetings/MeetingsContainer";
 import VCard from "@/components/dasboard-components/view-card/VCard";
