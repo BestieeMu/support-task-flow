@@ -2,6 +2,7 @@ import NextTopLoader from 'nextjs-toploader'
 import { AuthProvider } from '../Providers'
 import '../globals.css'
 import { Inter } from 'next/font/google'
+import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,8 @@ export default function RootLayout({ children }) {
       <AuthProvider>
         {children}
       </AuthProvider>
+      <Toaster position="top-right" richColors={true} theme={'dark'} />
+
       </body>
     </html>
   )

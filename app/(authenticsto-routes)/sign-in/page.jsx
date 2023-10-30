@@ -26,7 +26,7 @@ const Page = () => {
         return;
       }
       
-      router.replace('/profile')
+      router.replace('/profile?active=profile')
     } catch (error) {
       console.log(error);
     }
