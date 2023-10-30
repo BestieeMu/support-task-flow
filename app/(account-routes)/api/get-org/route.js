@@ -2,11 +2,10 @@ import connectMongodb from "@/libs/mongodb/mongodb";
 import Organization from "@/models/organization";
 
 export async function GET(request) {
-  const db = await connectMongodb();
-  const collection = db.collection('organizations'); // Replace 'organizations' with your actual collection name
+   await connectMongodb();
 
   // Create a change stream to watch for changes
-  const changeStream = collection.watch();
+  const changeStream = Organization.watch();
 
   // Listen for changes
   changeStream.on('change', async (change) => {
