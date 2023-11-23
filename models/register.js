@@ -20,6 +20,10 @@ const registerSchema = new Schema(
         createdOrganizations: {
             type: [],
         },
+        verified: {
+            type: Boolean,
+            default: false,
+        },
      
     },
     {

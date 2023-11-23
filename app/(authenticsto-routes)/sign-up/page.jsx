@@ -1,9 +1,9 @@
- 
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
+import { MainContext } from "@/context/account";
 
 
 const Page = () => {
@@ -11,7 +11,9 @@ const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({})
  const router = useRouter()
+ const { verifyEmail } = useContext(MainContext)
   // const handleFormChange = (e) => {
   //   e.preventDefault();
   //   setForm({
@@ -23,10 +25,40 @@ const Page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    let error = {}
+    setError(error)
+    // const emailRegex = /^(?!.*@(gmail|yahoo)\.com$)[\w-]+(\.[\w-]+)*@\w+(\.\w+)+$/;
+
+    // Check if all fields are filled
     if (!name || !email || !password) {
-      console.log("you are missing some filed");
-      return
+      error.message = "you are missing some fields";
+      setLoading(false);
+      return;
     }
+  
+    // Check if email is a company email
+    // if (!emailRegex.test(email)) {
+    //   error.email ="Please use a company email";
+    //   setLoading(false);
+    //   return;
+    // }
+  
+    // Check if name is at least 2 characters long
+    if (name.length < 2) {
+      error.name ="Name should be at least 2 characters long";
+      setLoading(false);
+      return;
+    }
+  
+    // Check if password is at least 8 characters long
+    if (password.length < 8) {
+      error.password = "Password should be at least 8 characters long";
+      setLoading(false);
+      return;
+    }
+  
+
     try {
       const user_exist_res = await fetch("/api/userExist", {
         method: "POST",
@@ -61,7 +93,8 @@ const Page = () => {
         setName("");
         setEmail("");
         setPassword("");
-        router.replace('/sign-in')
+        verifyEmail(email)
+        router.replace('/email-verification')
       } else {
         console.log("registration failed");
       }
@@ -146,6 +179,12 @@ const Page = () => {
                 className="w-full h-12 outline-none text-[16px] px-2 border border-gray-400 rounded"
               />
             </label>
+            <div className="text-red-500">
+              <p>{error.message}</p>
+              <p>{error.name}</p>
+              <p>{error.password}</p>
+              <p>{error.email}</p>
+            </div>
             <div className="flex justify-start items-center w-full ">
               <p>Forgot password?</p>
             </div>
