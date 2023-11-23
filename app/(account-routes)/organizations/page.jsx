@@ -1,4 +1,6 @@
 "use client";
+
+
 import Header from "@/components/Header/Header";
 import Form from "@/components/createOrg-form/Form";
 import Card from "@/components/orgPreview-card/Card";
