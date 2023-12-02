@@ -15,7 +15,7 @@ export async function GET(request) {
         // Verify the token and extract the user ID
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
         const userId = decodedToken.userId;
-        
+        console.log(userId);
     
         // Find the user associated with the user ID and set their verified field to true
         if (userId) {

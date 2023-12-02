@@ -50,7 +50,7 @@ export async function POST(request) {
         <p>Dear ${user.name},</p>
         <p>Thank you for creating an account. To verify your email address, please click the button below:</p>
         <p>
-          <a href="bototask.vercel.app/email-verification?token=${token}" style="display: inline-block; padding: 10px 20px; background-color: #0a04c3; color: white; text-decoration: none;">Verify Email</a>
+          <a href="https://bototask.vercel.app/email-verification?token=${token}" style="display: inline-block; padding: 10px 20px; background-color: #0a04c3; color: white; text-decoration: none;">Verify Email</a>
         </p>
         <p>If you did not create an account, you can safely ignore this email.</p>
         <p>Best regards,<br>Proneat Tech</p>
@@ -62,8 +62,16 @@ export async function POST(request) {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log(error);
+        return NextResponse.json(
+          { message: "Error sending you a mail please check if your mail is correct or check if you are have a network connection" },
+          { status: 404 }
+        );
       } else {
         console.log("Email sent: " + info.response);
+        return NextResponse.json(
+          { message: "Email Sent successfully" },
+          { status: 200 }
+        );
       }
     });
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { MdEmail } from "react-icons/md";
+import { toast } from "sonner";
 const Page = () => {
   const [verified, setVerified] = useState(false);
   const searchParams = useSearchParams();
@@ -19,7 +20,9 @@ const Page = () => {
           throw new Error("Network response was not ok");
         }
         if (response.ok) {
+          toast.success("Email verified successfully ")
           setVerified(true);
+          console.log(response.json());
         }
       });
     } catch (error) {
