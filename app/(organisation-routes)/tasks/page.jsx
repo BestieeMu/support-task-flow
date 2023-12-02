@@ -10,13 +10,13 @@ function Task() {
   const [taskType, setTaskType] = useState('');
   const [completed, setCompleted] = useState(false);
   const [adminComment, setAdminComment] = useState('');
-gi
+
 
   return (
     <div className="max-w-md mx-auto bg-white p-8 rounded-md shadow-md w-full">
       <h1 className="text-2xl font-bold mb-4">Task</h1>
 
-      <AssigneeSection  />
+      {/* <AssigneeSection  /> */}
       <TaskDurationRescheduleSection
         taskDuration={taskDuration}
         setTaskDuration={setTaskDuration}
