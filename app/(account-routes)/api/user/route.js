@@ -1,5 +1,6 @@
 import connectMongodb from "@/libs/mongodb/mongodb"
 import Accounts from "@/models/register";
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
 try {
@@ -10,6 +11,6 @@ try {
    
     return Response.json({ data })
 } catch (error) {
-  
+  return NextResponse.json({ message: "An error accured while creating your Organization" }, { status: 404 })
 }
   }

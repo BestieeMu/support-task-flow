@@ -19,13 +19,13 @@ const Page = () => {
     setLoading(true);
   
     try {
-      const isUserVerified = await checkUserVerification(email);
+      // const isUserVerified = await checkUserVerification(email);
   
-      if (!isUserVerified) {
-        toast.error("Email is not verified. Please check your email for the verification link or request a new one.");
-        setLoading(false);
-        return;
-      }
+      // if (!isUserVerified) {
+      //   toast.error("Email is not verified. Please check your email for the verification link or request a new one.");
+      //   setLoading(false);
+      //   return;
+      // }
   
       const res = await signIn("credentials", {
         email,
@@ -88,6 +88,7 @@ const Page = () => {
               Email
               <input
                 type="email"
+                name="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 required
@@ -101,6 +102,7 @@ const Page = () => {
               Password
               <input
                 type="password"
+                name="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 required

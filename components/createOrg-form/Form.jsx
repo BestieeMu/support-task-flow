@@ -3,19 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 
-
-
 const Form = ({ fetchOrg, setModal, getUserUpdate }) => {
   const { data: session } = useSession();
   const [org_name, setOrg_name] = useState("");
   const [createdBy, setCreatedBy] = useState("");
   const [avater, setAvater] = useState("");
   const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [submit, setSubmit] = useState(false);
 
   const getUser = async () => {
-
     try {
       const email = session.user.email;
       const res = await fetch("/api/user", {
@@ -38,11 +36,9 @@ const Form = ({ fetchOrg, setModal, getUserUpdate }) => {
   };
 
   useEffect(() => {
- if (session) {
-   getUser();
-  
- }
-    
+    if (session) {
+      getUser();
+    }
   }, [session]);
 
   if (!loading) {
@@ -55,6 +51,8 @@ const Form = ({ fetchOrg, setModal, getUserUpdate }) => {
 
   const create_org = async (e) => {
     e.preventDefault();
+    
+    setSubmit(true)
 
     try {
       //  const user = await finedOne(session.user.email)
@@ -71,7 +69,7 @@ const Form = ({ fetchOrg, setModal, getUserUpdate }) => {
             avater,
           }),
         });
-
+        console.log('hello');
         //   router.refresh()
         if (res.ok) {
           setAvater("");
@@ -79,7 +77,8 @@ const Form = ({ fetchOrg, setModal, getUserUpdate }) => {
           setOrg_name("");
           setCreatedBy("");
           fetchOrg();
-          getUserUpdate()
+          getUserUpdate();
+          setSubmit(false)
           toast.success("New organization created successfully ");
           setModal(false);
 
@@ -89,10 +88,13 @@ const Form = ({ fetchOrg, setModal, getUserUpdate }) => {
           addToCreatedOrganization(createdBy, organizationId);
         } else {
           console.log("registration failed");
+          setSubmit(false)
         }
       }
     } catch (error) {
       console.log(error, "from create org component");
+      setSubmit(false)
+
     }
   };
   return (
@@ -144,8 +146,11 @@ const Form = ({ fetchOrg, setModal, getUserUpdate }) => {
             >
               cancel
             </button>
-            <button className="bg-primary w-full text-[18px] h-12 text-white  rounded">
-              submit
+            <button
+              type="submit"
+              className="bg-primary w-full text-[18px] h-12 text-white  rounded"
+            >
+           {submit ? 'submitting...' : 'submit'}
             </button>
           </div>
         </form>

@@ -62,7 +62,8 @@ const Hero = () => {
             voluptates officia est vero aut doloremque unde.
           </p>
           {session ? (
-             <Link href={"/profile?active=profile"}>
+             <Link href={"/dashboard"}>
+             {/* <Link href={"/profile?active=profile"}> */}
              <button className="w-[180px] h-[50px] bg-[#0A04C3] text-white rounded-full text-[16px]">
                Welcome Back!
              </button>

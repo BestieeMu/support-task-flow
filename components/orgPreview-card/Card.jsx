@@ -2,16 +2,18 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { toast } from "sonner";
-
+import { useRouter } from "next/navigation";
 
 const Card = ({ preview, previewId }) => {
   const [organization, setOrganization] = useState({});
   const [loading, setLoading] = useState(true);
+  const [routingToDashboard, setRoutingToDashboard] = useState(false);
   const { data: session } = useSession();
-  const [createdBy, setCreatedBy] = useState('');
+  const [createdBy, setCreatedBy] = useState("");
   const [myOrg, setMyOrg] = useState([]);
 
 
+  const router = useRouter();
 
   const getUser = async () => {
     try {
@@ -66,33 +68,38 @@ const Card = ({ preview, previewId }) => {
     getUser();
   }, [session]);
 
-
-  const handleJoin = async () =>{
+  const handleJoin = async () => {
     try {
-        
-        const res = await fetch("/api/join-org", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            createdBy,
-            previewId
-          }),
-        });
-  
-        if (res.ok) {
+      const res = await fetch("/api/join-org", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          createdBy,
+          previewId,
+        }),
+      });
 
-          toast.success("Joining organization successful ");
-    fetchOrg();
-    getUser();
-          
-        }
-      } catch (error) {
-        toast.error("Error joining this organization, please try again");
-
+      if (res.ok) {
+        toast.success("Joining organization successful ");
+        fetchOrg();
+        getUser();
       }
-  }
+    } catch (error) {
+      toast.error("Error joining this organization, please try again");
+    }
+  };
+
+  const handleVisitOrg = (e, org_id) => {
+    e.preventDefault();
+    setRoutingToDashboard(true)
+    const current_org = localStorage.setItem("current_org", org_id);
+    if (current_org != '') {
+      router.push('/dashboard');
+      setRoutingToDashboard(false)
+    }
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -122,26 +129,30 @@ const Card = ({ preview, previewId }) => {
         <div className="w-full px-10 py-4 border-b flex items-center justify-between">
           <span className="text-center flex flex-col gap-3">
             <p className="text-xl">Members</p>
-            <div className="text-2xl font-[600]">{organization.members.length}</div>
+            <div className="text-2xl font-[600]">
+              {organization.members.length}
+            </div>
           </span>
-          {myOrg.includes(organization?._id) || organization.members.includes(createdBy) ? (
-                      <button className="px-3 py-2 rounded bg-primary text-white" >
-                      Visit organization
-                    </button>
-                  ) : (
-                    <button className="px-3 py-2 rounded bg-primary text-white" onClick={handleJoin}>
-                    Join organization
-                  </button>
-                  )}
-        
+          {myOrg.includes(organization?._id) ||
+          organization.members.includes(createdBy) ? (
+            <button
+              className="px-3 py-2 rounded bg-primary text-white"
+              onClick={(e) => handleVisitOrg(e, organization?._id)}
+            >
+             {routingToDashboard ? 'loading..' : ' Visit organization'}
+            </button>
+          ) : (
+            <button
+              className="px-3 py-2 rounded bg-primary text-white"
+              onClick={handleJoin}
+            >
+              Join organization
+            </button>
+          )}
         </div>
         <div className="w-full mt-4 px-10">
           <h4 className="text-xl font-[600]">Description</h4>
-          <p className="text-1xl mt-5">
-            {
-                organization.description
-            }
-          </p>
+          <p className="text-1xl mt-5">{organization.description}</p>
         </div>
       </div>
     </>

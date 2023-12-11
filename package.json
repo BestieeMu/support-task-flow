@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "antd": "^5.10.1",
+    "apexcharts": "^3.44.2",
     "autoprefixer": "10.4.15",
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.0",
@@ -27,6 +28,7 @@
     "postcss": "8.4.29",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
+    "react-apexcharts": "^1.4.1",
     "react-big-calendar": "^1.8.4",
     "react-calendar": "^4.6.0",
     "react-chartjs-2": "^5.2.0",

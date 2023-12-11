@@ -77,8 +77,12 @@ const UserProfile = ({ user }) => {
 };
 
 const UserOrg = ({ organization, createdBy, userId, setModal }) => {
-  const isMember =organization?.length != 0 && organization.some((org) => org.members.includes(userId));
-const isAdmin =organization?.length != 0 && organization.some((org) => createdBy.includes(org._id));
+  const isMember =
+    organization?.length != 0 &&
+    organization.some((org) => org.members.includes(userId));
+  const isAdmin =
+    organization?.length != 0 &&
+    organization.some((org) => createdBy.includes(org._id));
   return (
     <>
       <main className="w-10/12 flex flex-col items-center gap-20 rounded min-h-[550px] mt-20 ">
@@ -116,9 +120,13 @@ const isAdmin =organization?.length != 0 && organization.some((org) => createdBy
                       <div>{item?.org_name}</div>
                     </div>
 
-                    {organization.some((org) => item.members.includes(userId)) && <p className="mt-2">Member</p>}
+                    {organization.some((org) =>
+                      item.members.includes(userId)
+                    ) && <p className="mt-2">Member</p>}
 
-                    {organization.some((org) => createdBy.includes(item._id)) && <p className="mt-2">Admin</p>}
+                    {organization.some((org) =>
+                      createdBy.includes(item._id)
+                    ) && <p className="mt-2">Admin</p>}
                   </div>
                 </>
               ))}

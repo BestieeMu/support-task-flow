@@ -7,7 +7,7 @@ export async function POST(request) {
     try {
         const { org_name, createdBy, avater, description, admins } = await request.json();
         await connectMongodb();
-       const data = await Organization.create({ org_name, createdBy, avater,description, admins });
+       const data = await Organization.create({ org_name, createdBy, avater, description, admins });
 
        if(data){
         await Accounts.updateOne(

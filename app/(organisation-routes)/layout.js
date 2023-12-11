@@ -14,13 +14,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <NextTopLoader color="#0063F3" showSpinner={true} easing="ease" height={6} />
+        <NextTopLoader
+          color="#0063F3"
+          showSpinner={true}
+          easing="ease"
+          height={6}
+        />
 
-        <div className="flex items-start w-full">
-          <div className="w-[200px] ">
+        <div className="flex items-start bg-[#f3f3f3] h-screen w-full">
+          <div className="min-w-[180px]">
             <SideBar />
           </div>
-          <main className="w-full flex flex-col bg-primary h-screen">
+          <main className="w-full h-screen overflow-scroll">
             <Header />
             {children}
           </main>

@@ -40,16 +40,16 @@ const Header = () => {
         </div>
         {session ? (
           <div
-            className="relative  flex items-center gap-4 pr-10 cursor-pointer"
+            className="relative bg-white/90  pl-4 py-1 flex items-center gap-4 pr-4 rounded-md cursor-pointer"
             onClick={() => setDropProfile(!dropProfile)}
           >
-            <div className="flex gap-2 text-xl items-center">
-              {session?.user?.name}{" "}
+            <div className="flex gap-2 text-1xl items-center">
               <span>
                 <FiChevronDown />
               </span>
+              {session?.user?.name}{" "}
             </div>
-            <div className="bg-black w-[40px] h-[40px] rounded-full">g</div>
+            <div className="bg-black w-[30px] h-[30px] ">g</div>
 
             {dropProfile && (
               <div className="absolute w-[200px] drop-shadow-md right-0 p-2 mt-36 rounded bg-white">
