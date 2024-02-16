@@ -5,8 +5,10 @@ import ChartView from "@/components/dasboard-components/chart/Chart";
 import Meetings from "@/components/dasboard-components/meetings/Meetings";
 import AssignedTasks from "@/components/dasboard-components/on-going-task/Assignment";
 import VCard from "@/components/dasboard-components/view-card/VCard";
+import { MainContext } from "@/context/account";
 
-import React from "react";
+
+import React, { useContext, useEffect } from "react";
 
 const Page = () => {
   return (

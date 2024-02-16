@@ -11,6 +11,7 @@ import { CgProfile } from "react-icons/cg";
 const Header = () => {
   const [dropProfile, setDropProfile] = useState(false);
   const { data: session } = useSession();
+console.log(session);
   return (
     <>
       <nav className="w-full h-[70px] bg- border-b-2 border-[#110d2247] flex justify-between px-5 items-center ">
@@ -32,8 +33,8 @@ const Header = () => {
                 <li className="cursor-pointer">Home</li>
               </Link>
 
-              <Link href={"/organizations"}>
-                <li className="cursor-pointer">Organizations</li>
+              <Link href={"/departments"}>
+                <li className="cursor-pointer">Departments</li>
               </Link>
             </ul>
           </div>

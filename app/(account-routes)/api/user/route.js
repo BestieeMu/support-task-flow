@@ -1,16 +1,29 @@
-import connectMongodb from "@/libs/mongodb/mongodb"
+import connectMongodb from "@/libs/mongodb/mongodb";
 import Accounts from "@/models/register";
-import { NextResponse } from "next/server";
 
-export async function POST(request) {
-try {
-  const { email} = await request.json();
-  await connectMongodb()
-   const data = await Accounts.findOne({ email: email });
-    // console.log(data);
-   
-    return Response.json({ data })
-} catch (error) {
-  return NextResponse.json({ message: "An error accured while creating your Organization" }, { status: 404 })
+
+
+export async function GET(request) {
+    
+    try {
+        const searchParams = request.nextUrl.searchParams;
+        const email = searchParams.get("email");
+        await connectMongodb();
+       
+        // Find the user associated with the user ID and set their verified field to true
+        if (email) {
+
+            const user = await Accounts.findOne({ email }, "-password");
+                       
+            // Return the initial data to the client
+        return Response.json({ message: "current user",  data: user, status: "ok" });
+        }
+      
+        
+      } catch (error) {
+        // Handle token verification error
+        console.log("catch error",error);
+        // If the error is due to an invalid token, return the "Invalid token" error response
+        return Response.json({ message: "Internal server error",  status: "error" });
+      }
 }
-  }

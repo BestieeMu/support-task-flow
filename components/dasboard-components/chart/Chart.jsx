@@ -55,13 +55,13 @@ const setData = {
           
   series: [{
     name: 'Net Profit',
-    data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+    data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 54, 52, 34]
   }, {
     name: 'Revenue',
-    data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+    data: [76, 85, 101, 98, 87, 105, 91, 114, 94,45, 63, 35]
   }, {
     name: 'Free Cash Flow',
-    data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+    data: [35, 41, 36, 26, 45, 48, 52, 53, 41,56, 73, 14]
   }],
   options: {
     chart: {
@@ -84,13 +84,13 @@ const setData = {
       colors: ['transparent']
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+      categories: ['Jen', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     },
-    yaxis: {
-      title: {
-        text: '$ (thousands)'
-      }
-    },
+    // yaxis: {
+    //   title: {
+    //     text: '$ (thousands)'
+    //   }
+    // },
     fill: {
       opacity: 1
     },
@@ -109,12 +109,12 @@ const setData = {
 const ChartView = () => {
   return (
     <>
-    <div className="w-full rounded-md py-4 bg-white ">
+    <div className="w-full flex justify-center rounded-md p-4 bg-white ">
     <ReactApexChart
               options={setData.options}
               series={setData.series}
               type="bar"
-              width="600"
+           className="w-[100%]"
             />
     </div>
     </>

@@ -34,6 +34,12 @@ const authOptions = {
     ],
     session: {
         strategy: "jwt",
+        callbacks: {
+            session: async ({session, user}) => {
+              session.userId = user._id;    
+              return Promise.resolve(session);
+            }
+          }
     },
     secret: process.env.NEXTAUTH_SECRET,
     pages:{

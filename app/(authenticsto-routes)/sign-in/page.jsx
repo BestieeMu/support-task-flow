@@ -39,7 +39,7 @@ const Page = () => {
         return;
       }
   
-      router.replace("/profile?active=profile");
+      router.replace("/dashboard");
     } catch (error) {
       console.log(error);
       toast.error("An error occurred");

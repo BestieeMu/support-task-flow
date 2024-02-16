@@ -82,3 +82,16 @@ padding: 10px;
     background-color: transparent !important;
     color: white;
   }
+
+  .animate-load {
+    animation: animate 1.7s infinite ease-in-out;
+  }
+  
+  @keyframes animate {
+    0% {
+      transform: translateX(-70px);
+    }
+    100% {
+      transform: translateX(150px);
+    }
+  }

@@ -4,7 +4,9 @@ import { createContext, useState } from "react";
 export const MainContext = createContext({
 	// Add your default values here
     verificationEmail:  '',
+    currentOrgId: '',
     verifyEmail: () => {},
+    getcurrentOrgId: () => {},
 });
 
 export default function MainContextProvider({
@@ -13,6 +15,7 @@ export default function MainContextProvider({
 
 // Add your states here
 const [verificationEmail, setVerificationEmail] = useState("");
+const [currentOrgId, setCurrentOrgId] = useState('')
 
 
 //Add functions to update your state
@@ -21,11 +24,17 @@ const verifyEmail = (email) =>{
  
 }
 
+const getcurrentOrgId = (id) =>{
+  setCurrentOrgId(id)
+}
+
 return (
     <MainContext.Provider
       value={{
         verificationEmail,
+        currentOrgId,
         verifyEmail,
+        getcurrentOrgId
       }}
     >
       {children}

@@ -4,6 +4,10 @@ import { Inter } from "next/font/google";
 import SideBar from "@/components/dasboard-components/side-bar/SideBar";
 import NextTopLoader from "nextjs-toploader";
 
+import MainContextProvider from "@/context/account";
+import { AuthProvider } from "../Providers";
+import { Toaster } from "sonner";
+
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Next.js",
@@ -18,18 +22,23 @@ export default function RootLayout({ children }) {
           color="#0063F3"
           showSpinner={true}
           easing="ease"
-          height={6}
+          height={1.5}
         />
-
-        <div className="flex items-start bg-[#f3f3f3] h-screen w-full">
-          <div className="min-w-[180px]">
-            <SideBar />
+        
+        <MainContextProvider>
+              <AuthProvider>
+          <div className="flex items-start bg-[#f3f3f3] h-screen w-full">
+            <div className="min-w-[180px]">
+              <SideBar />
+            </div>
+            <main className="w-full h-screen overflow-scroll">
+              <Header />
+        {children}
+            </main>
           </div>
-          <main className="w-full h-screen overflow-scroll">
-            <Header />
-            {children}
-          </main>
-        </div>
+      </AuthProvider>
+        </MainContextProvider>
+        <Toaster position="top-right" richColors={true} theme={'light'} />
       </body>
     </html>
   );
